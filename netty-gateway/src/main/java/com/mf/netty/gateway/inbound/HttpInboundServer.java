@@ -1,5 +1,6 @@
 package com.mf.netty.gateway.inbound;
 
+
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.Channel;
@@ -10,11 +11,13 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public class HttpInboundServer {
+    private static Logger logger = LoggerFactory.getLogger(HttpInboundHandler.class);
 
     private int port;
 
@@ -45,7 +48,7 @@ public class HttpInboundServer {
                     .handler(new LoggingHandler(LogLevel.DEBUG))
                     .childHandler(new HttpInboundInitializer(this.proxyServers));
             Channel ch = b.bind(port).sync().channel();
-            System.out.println("开启netty http服务器，监听地址和端口为 http://127.0.0.1:" + port + '/');
+            logger.info("开启netty http服务器，监听地址和端口为 http://127.0.0.1:{}/", port);
             ch.closeFuture().sync();
 
         } catch (InterruptedException e) {

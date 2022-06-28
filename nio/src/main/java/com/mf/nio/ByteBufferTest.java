@@ -1,8 +1,6 @@
 package com.mf.nio;
 
 import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
-
 public class ByteBufferTest {
     public static void main(String[] args) {
         ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
@@ -34,10 +32,10 @@ public class ByteBufferTest {
         byteBuffer.get(bytes);
         System.out.println("读到的数据:" + new String(bytes, 0, bytes.length));
 
-        System.out.println("flip后 -->limit --->" + byteBuffer.limit());
-        System.out.println("flip后 -->position --->" + byteBuffer.position());
-        System.out.println("flip后 --> capacity --->" + byteBuffer.capacity());
-        System.out.println("flip后 --> mark --->" + byteBuffer.mark());
+        System.out.println("get后 -->limit --->" + byteBuffer.limit());
+        System.out.println("get后 -->position --->" + byteBuffer.position());
+        System.out.println("get后 --> capacity --->" + byteBuffer.capacity());
+        System.out.println("get后 --> mark --->" + byteBuffer.mark());
 
         System.out.println("-----------------------");
 
