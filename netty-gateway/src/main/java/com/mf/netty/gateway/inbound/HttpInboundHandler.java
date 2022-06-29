@@ -1,12 +1,13 @@
 package com.mf.netty.gateway.inbound;
 
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
+
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.codec.http.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -23,10 +24,8 @@ public class HttpInboundHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-//        super.channelRead(ctx, msg);
-
+        logger.info("HttpInboundHandler=====");
         FullHttpRequest fullHttpRequest = (FullHttpRequest) msg;
-        Thread.sleep(2000);
         handleTest(fullHttpRequest, ctx);
     }
 

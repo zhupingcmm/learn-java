@@ -1,5 +1,8 @@
-package com.mf.netty.gateway.inbound;
+package com.mf.netty.gateway.channel;
 
+import com.mf.netty.gateway.inbound.HttpInboundHandler;
+import com.mf.netty.gateway.inbound.HttpTrackingHandler;
+import com.mf.netty.gateway.outbound.HttpOutboundHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
@@ -8,11 +11,11 @@ import io.netty.handler.codec.http.HttpServerCodec;
 
 import java.util.List;
 
-public class HttpInboundInitializer extends ChannelInitializer<SocketChannel> {
+public class HttpChannelInitializer extends ChannelInitializer<SocketChannel> {
 
     private List<String> proxyServers;
 
-    public HttpInboundInitializer(List<String> proxyServers) {
+    public HttpChannelInitializer(List<String> proxyServers) {
         this.proxyServers = proxyServers;
     }
     @Override
@@ -20,7 +23,8 @@ public class HttpInboundInitializer extends ChannelInitializer<SocketChannel> {
         ChannelPipeline pipeline = ch.pipeline();
         pipeline.addLast(new HttpServerCodec());
         pipeline.addLast(new HttpObjectAggregator(1024*1024));
+        pipeline.addLast(new HttpTrackingHandler());
+        pipeline.addLast(new HttpOutboundHandler());
         pipeline.addLast(new HttpInboundHandler(this.proxyServers));
-
     }
 }
