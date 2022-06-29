@@ -17,7 +17,7 @@ public class HttpOutboundHandler extends ChannelOutboundHandlerAdapter {
 
     @Override
     public void read(ChannelHandlerContext ctx) throws Exception {
-        logger.info("***HttpOutboundHandler***");
+        logger.debug("***HttpOutboundHandler***");
         super.read(ctx);
     }
 
