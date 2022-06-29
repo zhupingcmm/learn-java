@@ -1,6 +1,7 @@
 package com.mf.netty.gateway;
 
 
+import com.mf.netty.gateway.config.ProxyServer;
 import com.mf.netty.gateway.inbound.HttpInboundHandler;
 import com.mf.netty.gateway.channel.HttpChannelInitializer;
 import io.netty.bootstrap.ServerBootstrap;
@@ -26,6 +27,7 @@ public class NettyServer {
 
     public NettyServer(int port) {
         this.port = port;
+        ProxyServer.getInstance().initConnectToZk();
     }
 
     public void run () {

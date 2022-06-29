@@ -2,6 +2,7 @@ package com.mf.netty.gateway.inbound;
 
 
 import com.alibaba.fastjson.JSON;
+import com.mf.netty.gateway.config.ProxyServer;
 import com.mf.netty.gateway.config.ZkSerializer;
 import com.mf.netty.gateway.route.Router;
 import com.mf.netty.gateway.route.impl.RouterImpl;
@@ -28,15 +29,10 @@ import java.util.concurrent.TimeUnit;
 public class HttpInboundHandler extends ChannelInboundHandlerAdapter {
 
     private static Logger logger = LoggerFactory.getLogger(HttpInboundHandler.class);
-
-    private static final String ZK_ROOT = "/server";
-
     private ThreadPoolExecutor service;
-    private Map<String, String> proxyServers = new HashMap<>();
 
     public HttpInboundHandler () {
         initThreadPool();
-        initConnectToZk();
     }
 
     private void initThreadPool() {
@@ -49,41 +45,26 @@ public class HttpInboundHandler extends ChannelInboundHandlerAdapter {
     }
 
 
-    private void initConnectToZk () {
-        logger.info("start to connect zk");
-        ZkClient zkClient = new ZkClient("localhost:2181");
-        zkClient.setZkSerializer(new ZkSerializer());
-        if (!zkClient.exists(ZK_ROOT)) {
-            throw new RuntimeException("zk not contain the root node");
-        }
-        List<String> children = zkClient.getChildren(ZK_ROOT);
-        children.forEach(child -> {
-            String childPath = ZK_ROOT + "/" + child;
 
-            String url = zkClient.readData(childPath);
-            proxyServers.put(childPath, url);
-
-            IZkDataListener dataListener = new IZkDataListener() {
-                @Override
-                public void handleDataChange(String s, Object o) throws Exception {
-                    logger.info("zk server have a change action, we must delete {} in local", s);
-                    proxyServers.put(s, (String) o);
-                }
-
-                @Override
-                public void handleDataDeleted(String s) throws Exception {
-                    logger.info("zk server have a delete action, we must delete {} in local", s);
-                    proxyServers.remove(s);
-                }
-            };
-            zkClient.subscribeDataChanges(childPath,dataListener);
-        });
-    }
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         FullHttpRequest fullHttpRequest = (FullHttpRequest) msg;
-        fetchGet(fullHttpRequest, ctx);
+        String method = String.valueOf(fullHttpRequest.method());
+        switch (method) {
+            case "POST":
+                service.submit(() -> fetchPost(fullHttpRequest, ctx));
+                break;
+            case "PATCH":
+                service.submit(() -> fetchPatch(fullHttpRequest, ctx));
+                break;
+            case "DELETE":
+                service.submit(() -> fetchDelete(fullHttpRequest, ctx));
+                break;
+            default:
+                service.submit(() -> fetchGet(fullHttpRequest, ctx));
+        }
+
     }
 
     @Override
@@ -91,7 +72,20 @@ public class HttpInboundHandler extends ChannelInboundHandlerAdapter {
         super.channelReadComplete(ctx);
     }
 
+    private void fetchPost(final FullHttpRequest request, final ChannelHandlerContext ctx) {
+
+    }
+
+    private void fetchPatch(final FullHttpRequest request, final ChannelHandlerContext ctx) {
+
+    }
+
+    private void fetchDelete(final FullHttpRequest request, final ChannelHandlerContext ctx) {
+
+    }
+
     private void fetchGet(final FullHttpRequest fullHttpRequest, final ChannelHandlerContext ctx) {
+        Map<String,String> proxyServers = ProxyServer.getInstance().getProxyServers();
         Router router = new RouterImpl();
         String backendUrl = router.route(proxyServers) + fullHttpRequest.uri();
         OkHttpClient okHttpClient = new OkHttpClient();
@@ -135,7 +129,5 @@ public class HttpInboundHandler extends ChannelInboundHandlerAdapter {
                 ctx.flush();
             }
         }
-
-
     }
 }
