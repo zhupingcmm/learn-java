@@ -39,11 +39,8 @@ public class HttpInboundHandler extends ChannelInboundHandlerAdapter {
                 );
     }
 
-
-
-
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    public void channelRead(ChannelHandlerContext ctx, Object msg) {
         FullHttpRequest fullHttpRequest = (FullHttpRequest) msg;
         String method = String.valueOf(fullHttpRequest.method());
         switch (method) {
@@ -101,7 +98,6 @@ public class HttpInboundHandler extends ChannelInboundHandlerAdapter {
 
             }
         });
-
     }
 
 
