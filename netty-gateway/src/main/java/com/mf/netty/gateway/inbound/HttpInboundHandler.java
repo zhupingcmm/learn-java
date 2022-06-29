@@ -3,7 +3,6 @@ package com.mf.netty.gateway.inbound;
 
 import com.alibaba.fastjson.JSON;
 import com.mf.netty.gateway.config.ProxyServer;
-import com.mf.netty.gateway.config.ZkSerializer;
 import com.mf.netty.gateway.route.Router;
 import com.mf.netty.gateway.route.impl.RouterImpl;
 import io.netty.buffer.Unpooled;
@@ -12,15 +11,11 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.codec.http.*;
 import okhttp3.*;
-import org.I0Itec.zkclient.IZkDataListener;
-import org.I0Itec.zkclient.ZkClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -91,6 +86,7 @@ public class HttpInboundHandler extends ChannelInboundHandlerAdapter {
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
                 .get()
+                .header("mao", "zp")
                 .url(backendUrl)
                 .build();
         okHttpClient.newCall(request).enqueue(new Callback() {

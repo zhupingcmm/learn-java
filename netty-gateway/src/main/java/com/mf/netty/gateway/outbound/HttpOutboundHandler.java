@@ -3,6 +3,8 @@ package com.mf.netty.gateway.outbound;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelOutboundHandlerAdapter;
 import io.netty.channel.ChannelPromise;
+import io.netty.handler.codec.http.FullHttpRequest;
+import io.netty.handler.codec.http.FullHttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +24,11 @@ public class HttpOutboundHandler extends ChannelOutboundHandlerAdapter {
 
     @Override
     public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
-        super.write(ctx, msg, promise);
+        FullHttpResponse fullHttpResponse = (FullHttpResponse) msg;
+        fullHttpResponse.headers().set("mao", "cmm");
+
+        ctx.writeAndFlush(fullHttpResponse);
+//        super.write(ctx, msg, promise);
     }
 
     @Override
