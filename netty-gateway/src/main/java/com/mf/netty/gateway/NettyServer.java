@@ -2,6 +2,7 @@ package com.mf.netty.gateway;
 
 
 import com.mf.netty.gateway.config.ProxyServer;
+import com.mf.netty.gateway.config.ThreadPool;
 import com.mf.netty.gateway.inbound.HttpInboundHandler;
 import com.mf.netty.gateway.channel.HttpChannelInitializer;
 import io.netty.bootstrap.ServerBootstrap;
@@ -17,7 +18,6 @@ import io.netty.handler.logging.LoggingHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
 
 public class NettyServer {
     private static Logger logger = LoggerFactory.getLogger(HttpInboundHandler.class);
@@ -28,6 +28,7 @@ public class NettyServer {
     public NettyServer(int port) {
         this.port = port;
         ProxyServer.getInstance().initConnectToZk();
+        ThreadPool.getInstance().init();
     }
 
     public void run () {
