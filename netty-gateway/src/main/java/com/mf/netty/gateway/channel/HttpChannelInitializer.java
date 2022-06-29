@@ -9,15 +9,8 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
 
-import java.util.List;
-
 public class HttpChannelInitializer extends ChannelInitializer<SocketChannel> {
 
-    private List<String> proxyServers;
-
-    public HttpChannelInitializer(List<String> proxyServers) {
-        this.proxyServers = proxyServers;
-    }
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();
@@ -25,6 +18,6 @@ public class HttpChannelInitializer extends ChannelInitializer<SocketChannel> {
         pipeline.addLast(new HttpObjectAggregator(1024*1024));
         pipeline.addLast(new HttpTrackingHandler());
         pipeline.addLast(new HttpOutboundHandler());
-        pipeline.addLast(new HttpInboundHandler(this.proxyServers));
+        pipeline.addLast(new HttpInboundHandler());
     }
 }

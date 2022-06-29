@@ -23,11 +23,9 @@ public class NettyServer {
 
     private int port;
 
-    private List<String> proxyServers;
 
-    public NettyServer(int port, List<String> proxyServers) {
+    public NettyServer(int port) {
         this.port = port;
-        this.proxyServers = proxyServers;
     }
 
     public void run () {
@@ -48,7 +46,7 @@ public class NettyServer {
             b.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.DEBUG))
-                    .childHandler(new HttpChannelInitializer(this.proxyServers));
+                    .childHandler(new HttpChannelInitializer());
             Channel ch = b.bind(port).sync().channel();
             logger.info("开启netty http服务器，监听地址和端口为 http://127.0.0.1:{}/", port);
             ch.closeFuture().sync();
