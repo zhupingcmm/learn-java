@@ -37,9 +37,4 @@ public class HttpInboundHandler extends ChannelInboundHandlerAdapter {
         }
 
     }
-
-    @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-        super.channelReadComplete(ctx);
-    }
 }
