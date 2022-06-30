@@ -1,6 +1,7 @@
 package com.mf.netty.gateway.inbound;
 
 
+import com.mf.netty.gateway.config.Constants;
 import com.mf.netty.gateway.config.ThreadPool;
 import com.mf.netty.gateway.inbound.http.HttpCall;
 import com.mf.netty.gateway.inbound.http.impl.OkHttp;
@@ -22,13 +23,13 @@ public class HttpInboundHandler extends ChannelInboundHandlerAdapter {
         HttpCall httpCall = new OkHttp();
         logger.info("start to request");
         switch (method) {
-            case "POST":
+            case Constants.POST:
                 ThreadPool.getInstance().getService().submit(() -> httpCall.fetchPost(fullHttpRequest, ctx));
                 break;
-            case "PATCH":
+            case Constants.PATCH:
                 ThreadPool.getInstance().getService().submit(() -> httpCall.fetchPatch(fullHttpRequest, ctx));
                 break;
-            case "DELETE":
+            case Constants.DELETE:
                 ThreadPool.getInstance().getService().submit(() -> httpCall.fetchDelete(fullHttpRequest, ctx));
                 break;
             default:
