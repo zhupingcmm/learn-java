@@ -1,6 +1,5 @@
 package com.mf.spring01;
 
-import com.mf.aop.ISchool;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -21,9 +20,9 @@ public class Demo01 {
         ZClass zClass = (ZClass) context.getBean(ZClass.class);
         zClass.dong();
 
-        System.out.println("=================School===================");
-        ISchool school = (School) context.getBean("school");
-        school.ding();
+//        System.out.println("=================School===================");
+//        ISchool school = (School) context.getBean("school");
+//        school.ding();
 
     }
 }

@@ -29,9 +29,10 @@
     <bean id="school" class="com.mf.spring01.School"/>
 
     <bean id="aop1" class="com.mf.spring01.Aop1"/>
+    <bean id="aop2" class="com.mf.spring01.Aop2"/>
     <context:component-scan base-package="com.mf" />
 
-    <aop:aspectj-autoproxy />
+    <aop:aspectj-autoproxy  />
 
     <aop:config>
         <aop:pointcut id="p1" expression="execution(* com.mf.aop.*.*(..))"/>
