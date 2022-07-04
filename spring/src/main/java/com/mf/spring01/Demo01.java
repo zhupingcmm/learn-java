@@ -10,6 +10,7 @@ public class Demo01 {
         System.out.println(student123.toString());
         student123.print();
 
+        System.out.println("=================student100===================");
         Student student100 = (Student) context.getBean("student100");
         System.out.println(student100.toString());
         student100.print();
