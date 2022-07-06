@@ -15,14 +15,27 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
 
 
+@RequiredArgsConstructor
+@Service
 public class NettyServer {
     private static Logger logger = LoggerFactory.getLogger(HttpInboundHandler.class);
 
+    @Setter
     private int port;
+
+    @Autowired
+    private HttpChannelInitializer httpChannelInitializer;
 
 
     public NettyServer(int port) {
@@ -30,6 +43,14 @@ public class NettyServer {
         ProxyServer.getInstance().initConnectToZk();
         ThreadPool.getInstance().init();
     }
+    @PostConstruct
+    public void start () {
+        this.port = 8888;
+        ProxyServer.getInstance().initConnectToZk();
+        ThreadPool.getInstance().init();
+        run();
+    }
+
 
     public void run () {
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
@@ -49,7 +70,7 @@ public class NettyServer {
             b.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.DEBUG))
-                    .childHandler(new HttpChannelInitializer());
+                    .childHandler(httpChannelInitializer);
             Channel ch = b.bind(port).sync().channel();
             logger.info("开启netty http服务器，监听地址和端口为 http://127.0.0.1:{}/", port);
             ch.closeFuture().sync();

@@ -5,13 +5,17 @@ import com.mf.netty.gateway.config.Constants;
 import com.mf.netty.gateway.config.ThreadPool;
 import com.mf.netty.gateway.inbound.http.HttpCall;
 import com.mf.netty.gateway.inbound.http.impl.OkHttp;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.codec.http.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 
+@Component
+@ChannelHandler.Sharable
 public class HttpInboundHandler extends ChannelInboundHandlerAdapter {
 
     private static Logger logger = LoggerFactory.getLogger(HttpInboundHandler.class);

@@ -16,6 +16,7 @@
         <module>common</module>
         <module>spring</module>
         <module>java-core</module>
+        <module>bc</module>
     </modules>
 
     <parent>

@@ -6,8 +6,9 @@ import io.netty.channel.ChannelPromise;
 import io.netty.handler.codec.http.FullHttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class HttpOutboundHandler extends ChannelOutboundHandlerAdapter {
     Logger logger = LoggerFactory.getLogger(HttpOutboundHandler.class);
     @Override
