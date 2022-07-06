@@ -3,14 +3,6 @@ package com.mf.java.core.jdbc;
 import java.sql.*;
 
 public class JdbcUtil {
-    public static Connection getConnection() {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            return DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useInformationSchema=false&charset=utf8mb4&useSSL=false&allowMultiQueries=true&allowPublicKeyRetrieval=true", "root", "1234");
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public static void release(Connection connection, PreparedStatement preparedStatement, ResultSet resultSet){
         try {
@@ -32,7 +24,8 @@ public class JdbcUtil {
     }
 
     public static ResultSet getItem(String sql){
-        Connection connection = getConnection();
+        MyConnection myConnection = new MyConnection();
+        Connection connection = myConnection.getConnection();
         PreparedStatement prepareStatement = null;
         ResultSet result = null;
 
@@ -50,7 +43,8 @@ public class JdbcUtil {
     }
 
     public static int updateItem(String sql){
-        Connection connection =  getConnection();
+        MyConnection myConnection = new MyConnection();
+        Connection connection = myConnection.getConnection();
         PreparedStatement prepareStatement = null;
         try {
 
@@ -64,7 +58,8 @@ public class JdbcUtil {
     }
 
     public static int deleteItem(String sql){
-        Connection connection =  getConnection();
+        MyConnection myConnection = new MyConnection();
+        Connection connection = myConnection.getConnection();
         PreparedStatement prepareStatement = null;
         try {
 
@@ -79,7 +74,8 @@ public class JdbcUtil {
 
 
     public static int addItem(String sql){
-        Connection connection =  getConnection();
+        MyConnection myConnection = new MyConnection();
+        Connection connection = myConnection.getConnection();
         PreparedStatement prepareStatement = null;
         try {
 
