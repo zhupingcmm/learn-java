@@ -6,14 +6,14 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Demo01 {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        Student student123 = (Student) context.getBean("student123");
-        System.out.println(student123.toString());
-        student123.print();
-
-        System.out.println("=================ZClass===================");
-        Student student100 = (Student) context.getBean("student100");
-        System.out.println(student100.toString());
-        student100.print();
+//        Student student123 = (Student) context.getBean("student123");
+//        System.out.println(student123.toString());
+//        student123.print();
+//
+//        System.out.println("=================ZClass===================");
+//        Student student100 = (Student) context.getBean("student100");
+//        System.out.println(student100.toString());
+//        student100.print();
 
 
         System.out.println("=================ZClass===================");

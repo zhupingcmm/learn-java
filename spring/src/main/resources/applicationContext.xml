@@ -18,14 +18,14 @@
         <property name="name" value="cmm"/>
     </bean>
 
-    <bean id="zClass" class="com.mf.spring01.ZClass">
-        <property name="students">
-            <list>
-                <ref bean="student100"/>
-                <ref bean="student123"/>
-            </list>
-        </property>
-    </bean>
+<!--    <bean id="zClass" class="com.mf.spring01.ZClass">-->
+<!--        <property name="students">-->
+<!--            <list>-->
+<!--                <ref bean="student100"/>-->
+<!--                <ref bean="student123"/>-->
+<!--            </list>-->
+<!--        </property>-->
+<!--    </bean>-->
     <bean id="school" class="com.mf.spring01.School"/>
 
     <bean id="aop1" class="com.mf.spring01.Aop1"/>
@@ -34,13 +34,13 @@
 
     <aop:aspectj-autoproxy  />
 
-    <aop:config>
-        <aop:pointcut id="p1" expression="execution(* com.mf.aop.*.*(..))"/>
-        <aop:aspect ref="aop1">
-            <aop:around method="around" pointcut-ref="p1"/>
-            <aop:before method="startTransaction" pointcut-ref="p1"/>
-            <aop:after method="commitTransaction" pointcut-ref="p1"/>
-        </aop:aspect>
-    </aop:config>
+<!--    <aop:config>-->
+<!--        <aop:pointcut id="p1" expression="execution(* com.mf.aop.*.*(..))"/>-->
+<!--        <aop:aspect ref="aop1">-->
+<!--            <aop:around method="around" pointcut-ref="p1"/>-->
+<!--            <aop:before method="startTransaction" pointcut-ref="p1"/>-->
+<!--            <aop:after method="commitTransaction" pointcut-ref="p1"/>-->
+<!--        </aop:aspect>-->
+<!--    </aop:config>-->
 
 </beans>
