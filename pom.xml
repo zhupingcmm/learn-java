@@ -38,6 +38,10 @@
         <fastjson.version>1.2.70</fastjson.version>
         <cglib.version>3.3.0</cglib.version>
         <spring-version>4.3.29.RELEASE</spring-version>
+        <c3p0.version>0.9.0</c3p0.version>
+        <mysql.driver.version>8.0.28</mysql.driver.version>
+        <commons.logging.version>1.2</commons.logging.version>
+        <junit.version>4.13</junit.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -149,6 +153,28 @@
                 <artifactId>cglib</artifactId>
                 <version>${cglib.version}</version>
             </dependency>
+            <dependency>
+                <groupId>c3p0</groupId>
+                <artifactId>c3p0</artifactId>
+                <version>${c3p0.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.driver.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>${commons.logging.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.13</version>
+                <scope>test</scope>
+            </dependency>
+
         </dependencies>
 
     </dependencyManagement>

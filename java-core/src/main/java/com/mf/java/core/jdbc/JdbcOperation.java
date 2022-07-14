@@ -28,7 +28,7 @@ public class JdbcOperation {
         }
     }
 
-    public ResultSet getItem(String sql){
+    public ResultSet getItem(String sql) throws SQLException {
         Connection connection = dataSourceManager.getConnection();
         PreparedStatement prepareStatement = null;
         ResultSet result = null;
@@ -40,6 +40,7 @@ public class JdbcOperation {
             connection.commit();
             return result;
         } catch (SQLException e) {
+            connection.rollback();
             throw new RuntimeException(e);
         } finally {
             release(connection, prepareStatement, result);

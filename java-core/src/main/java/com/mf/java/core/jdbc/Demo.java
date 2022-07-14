@@ -2,10 +2,11 @@ package com.mf.java.core.jdbc;
 
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 
 public class Demo {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
         JdbcOperation jdbcOperation = new JdbcOperation();
         ResultSet resultSet = jdbcOperation.getItem("select * from user where id = 2");
