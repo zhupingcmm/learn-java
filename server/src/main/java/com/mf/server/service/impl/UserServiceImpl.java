@@ -15,7 +15,9 @@ public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
     @Override
-    public List<User> findUsers(HashMap<String, String> pageConfig) {
+    public List<User> findUsers(HashMap<String, Integer> pageConfig) {
+
+
         return userMapper.findUsers(pageConfig);
     }
 }

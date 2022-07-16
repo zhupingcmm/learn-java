@@ -8,5 +8,5 @@ import java.util.List;
 
 @Mapper
 public interface UserMapper {
-    List<User> findUsers(HashMap<String, String> map);
+    List<User> findUsers(HashMap<String, Integer> map);
 }

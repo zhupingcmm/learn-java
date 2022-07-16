@@ -15,11 +15,13 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("/users/{pagesize}/{start}")
-    public List<User> getUser(@PathVariable(required = false) String pagesize, @PathVariable(required = false) String start){
-        HashMap<String, String> pageConfig = new HashMap<>();
+    @GetMapping("/users/{pagesize}/{pagenumber}")
+    public List<User> getUser(@PathVariable(required = false) int pagesize, @PathVariable(required = false) int pagenumber){
+
+
+        HashMap<String, Integer> pageConfig = new HashMap<>();
         pageConfig.put("pageSize", pagesize);
-        pageConfig.put("start", start);
+        pageConfig.put("start", pagenumber * pagesize);
         return userService.findUsers(pageConfig);
     }
 }

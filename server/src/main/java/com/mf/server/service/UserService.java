@@ -6,5 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public interface UserService {
-    List<User> findUsers(HashMap<String, String> pageConfig);
+    List<User> findUsers(HashMap<String, Integer> pageConfig);
+
 }
