@@ -11,7 +11,10 @@ public class CglibProxy implements MethodInterceptor {
     private Object object;
     @Override
     public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
-        System.out.println("cglib proxy");
+//        System.out.println("cglib proxy");
+        if (method.getName().equals("commit")) {
+            System.out.println("try to commit into table");
+        }
         return proxy.invoke(object, args);
     }
 
