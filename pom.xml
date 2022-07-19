@@ -15,6 +15,7 @@
         <module>common</module>
         <module>spring</module>
         <module>java-core</module>
+        <module>mq</module>
     </modules>
 
     <parent>
@@ -41,9 +42,15 @@
         <commons.logging.version>1.2</commons.logging.version>
         <junit.version>4.13</junit.version>
         <mysql.version>2.2.2</mysql.version>
+        <activemq.version>5.16.0</activemq.version>
     </properties>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-all</artifactId>
+                <version>${activemq.version}</version>
+            </dependency>
             <dependency>
                 <groupId>io.netty</groupId>
                 <artifactId>netty-all</artifactId>

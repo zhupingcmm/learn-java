@@ -17,8 +17,6 @@ public class UserController {
 
     @GetMapping("/users/{pagesize}/{pagenumber}")
     public List<User> getUser(@PathVariable(required = false) int pagesize, @PathVariable(required = false) int pagenumber){
-
-
         HashMap<String, Integer> pageConfig = new HashMap<>();
         pageConfig.put("pageSize", pagesize);
         pageConfig.put("start", pagenumber * pagesize);
