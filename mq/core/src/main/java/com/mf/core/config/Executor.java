@@ -16,7 +16,7 @@ public class Executor {
     private final OrderService orderService;
     private final Consumer consumer;
 
-    @PostConstruct
+//    @PostConstruct
     public void execute() {
         Timer timer = new Timer();
 
