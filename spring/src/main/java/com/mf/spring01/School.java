@@ -3,6 +3,7 @@ package com.mf.spring01;
 import com.mf.aop.ISchool;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

@@ -7,8 +7,8 @@ public class Demo01 {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 //        Student student123 = (Student) context.getBean("student123");
-//        System.out.println(student123.toString());
-//        student123.print();
+//        Student student12 = (Student) context.getBean("student123");
+//        System.out.println(student12 == student123);
 //
 //        System.out.println("=================ZClass===================");
 //        Student student100 = (Student) context.getBean("student100");
@@ -16,8 +16,8 @@ public class Demo01 {
 //        student100.print();
 
 
-        System.out.println("=================ZClass===================");
-
+//        System.out.println("=================ZClass===================");
+//
         ZClass zClass = (ZClass) context.getBean(ZClass.class);
         zClass.dong();
 

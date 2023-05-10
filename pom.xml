@@ -16,6 +16,9 @@
         <module>spring</module>
         <module>java-core</module>
         <module>mq</module>
+        <module>mybatis-demo</module>
+        <module>spring-01</module>
+        <module>zk-demo</module>
     </modules>
 
     <parent>
